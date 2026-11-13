@@ -1,131 +1,321 @@
 # Gym Management System
 
-A Java-based gym management system that handles subscriptions, registrations, trainers, and extra services.
-
 ## Overview
 
-This system is designed to manage a gym's daily operations including:
-- Managing member subscriptions (General and VIP)
-- Processing registrations
-- Handling trainer information
-- Providing extra services like meal plans and calorie calculations
-- File I/O operations for data persistence
+Gym Management System is a Java-based application developed to simulate the management of a fitness club. The system helps manage gym memberships, member registrations, trainer information, and additional fitness services through a simple menu-driven interface.
+
+The project was developed using Object-Oriented Programming (OOP) principles and demonstrates the practical use of inheritance, abstraction, polymorphism, interfaces, file handling, collections, and exception handling in Java.
+
+---
+
+## System Features
+
+The system provides several services that help manage gym operations, including:
+
+### Subscription Management
+- Create and manage gym subscriptions.
+- Support for two subscription types:
+  - General Subscription
+  - VIP Subscription
+- Calculate subscription costs based on membership duration.
+- Display available subscriptions and their benefits.
+- Remove existing subscriptions.
+
+### Registration Management
+- Register new gym members.
+- Link members to available subscriptions.
+- Confirm registrations.
+- Cancel existing registrations.
+- View registration details using registration ID.
+
+### Trainer Management
+- Add trainers to the system.
+- Store trainer information such as:
+  - Name
+  - ID
+  - Years of experience
+  - Main specialization
+  - Professional certificates
+
+### Extra Services
+- Calculate daily calorie requirements based on user information.
+- Display available meal options and prices.
+
+### Data Storage
+- Save trainer information to a text file.
+- Read stored trainer information from a text file.
+
+### User Interface
+- Console-based menu system.
+- Graphical User Interface (GUI) support.
+
+---
+
+## Technologies Used
+
+- Java
+- Object-Oriented Programming (OOP)
+- Inheritance
+- Polymorphism
+- Abstraction
+- Interfaces
+- ArrayList Collections
+- Exception Handling
+- File Handling (I/O)
+- Java GUI
+
+---
 
 ## Project Structure
 
-### Core Classes
+### Person (Abstract Class)
 
-#### Person (Abstract Class)
-- Base class for all persons in the system
-- Contains common attributes: `id`, `name`
-- Extended by `Member` and `Trainer`
+Base class for all people in the system.
 
-#### Subscription (Abstract Class)
-- Base class for subscription types
-- Attributes: `name`, `id`, `pricePerMonth`, `TimeInMonth`
-- Abstract method: `calcPrice()`
-- Extended by `General` and `VIP`
+Attributes:
+- id
+- name
 
-#### General
-- Standard gym subscription
-- Adds `MAX_ACCESS` (maximum gym visits)
-- Calculates price: `pricePerMonth + 100 SAR` × duration
+Extended by:
+- Member
+- Trainer
 
-#### VIP
-- Premium subscription with personal trainer
-- Includes `Trainer` object
-- Calculates price: `pricePerMonth + 460 SAR` × duration
+---
 
-#### Trainer
-- Extends `Person`
-- Attributes: `experience`, `mainSpecialization`, `Certificate[]`
-- Stores trainer's qualifications and certifications
+### Subscription (Abstract Class)
 
-#### Certificate
-- Represents a trainer's certification
-- Attributes: `name`, `year`
+Base class for all subscription types.
 
-#### Registration
-- Implements `Payable` interface
-- Links a member with a subscription
-- Tracks registration status: "New", "CONFIRMED", "CANCELLED"
-- Static counter for registration numbers
+Attributes:
+- id
+- name
+- pricePerMonth
+- TimeInMonth
 
-#### ExtraService
-- Implements `Payable` interface
-- Provides calorie calculation based on weight and height
-- Supports meal ordering functionality
+Extended by:
+- General
+- VIP
 
-#### MEALS
-- Represents meal options
-- Attributes: `mealName`, `price`
+---
 
-### Interfaces
+### General
 
-#### Payable
-- Contains constant `VAT` (0.75)
-- Defines abstract method `pay()`
-- Implemented by `Registration` and `ExtraService`
+Represents a standard gym membership.
 
-### File I/O
+Features:
+- Limited gym access.
+- Friend invitation functionality.
+- Subscription price calculation.
 
-#### WriteText
-- Writes subscription data to text file using `Formatter`
-- Uses `Subscription.toString()` for formatting
+---
 
-#### ReadText
-- Reads data from text file using `Scanner`
-- Handles `FileNotFoundException` and `NoSuchElementException`
+### VIP
 
-### Main System
+Represents a premium gym membership.
 
-#### GymSystem
-- Main application class with menu-driven interface
-- Uses `ArrayList` for storing subscriptions, registrations, and trainers
-- Provides 11 main functions:
-  1. Add Subscription
-  2. Remove Subscription
-  3. New Registration
-  4. Show Registration
-  5. Cancel Registration
-  6. Join as Trainer
-  7. Extra Services (Calories/Meals)
-  8. Save to File
-  9. Read from File
-  10. GUI (placeholder)
-  11. Exit
+Features:
+- Includes a personal trainer.
+- Additional VIP benefits.
+- Free parking service.
+- Enhanced subscription package.
 
-## Features
+---
 
-### Subscription Management
-- Add General or VIP subscriptions
-- Remove existing subscriptions
-- Calculate total price based on duration
+### Member
 
-### Registration System
-- Register members with existing subscriptions
-- Confirm or cancel registrations
-- View registration information
+Represents gym members.
 
-### Trainer Management
-- Store trainer details including experience and certifications
-- VIP subscriptions include personal trainer
+Stores:
+- Member ID
+- Name
+- Phone number
 
-### Extra Services
-- Calculate daily calorie needs based on weight and height
-- Order meals with displayed prices
+---
 
-### Data Persistence
-- Save subscription data to text file
-- Read data from text file
+### Trainer
 
-## Technical Notes
+Represents trainers within the gym.
 
-- Uses Java's abstract classes and interfaces
-- Implements polymorphism with `Subscription` and `Person`
-- Exception handling with try-catch blocks
-- Static members for registration count
-- Array-based certificate storage for trainers
+Stores:
+- Trainer ID
+- Name
+- Experience
+- Specialization
+- Certifications
 
+---
 
+### Certificate
 
+Represents professional certificates earned by a trainer.
+
+Stores:
+- Certificate name
+- Certificate year
+
+---
+
+### Registration
+
+Handles member registrations.
+
+Responsibilities:
+- Create registrations.
+- Confirm registrations.
+- Cancel registrations.
+- Track registration status.
+
+---
+
+### ExtraService
+
+Provides additional fitness-related services.
+
+Features:
+- Calorie calculation.
+- Additional membership services.
+
+---
+
+### MEALS
+
+Represents available meal options.
+
+Stores:
+- Meal name
+- Meal price
+
+---
+
+### Payable Interface
+
+Implemented by:
+- Registration
+- ExtraService
+
+Responsibilities:
+- Define payment-related behavior.
+- Provide VAT constant.
+
+---
+
+### ReadText
+
+Handles reading information from text files.
+
+Responsibilities:
+- Open text files.
+- Read and display file contents.
+- Handle file-related exceptions.
+
+---
+
+### WriteText
+
+Handles writing information to text files.
+
+Responsibilities:
+- Save trainer data.
+- Store information for future use.
+
+---
+
+### Main
+
+The entry point of the application.
+
+Responsibilities:
+- Display system menu.
+- Handle user input.
+- Manage system operations.
+- Connect all classes together.
+
+---
+
+## How to Run the Project
+
+### 1. Download the Project
+
+Download the project files.
+```
+Gym-Management-System
+│
+├── src
+│   └── projectgymsystem
+│       ├── Main.java
+│       ├── GymSystem.java
+│       ├── Member.java
+│       └── Other Classes...
+│
+├── nbproject
+├── build.xml
+├── manifest.mf
+└──  README.md
+```
+
+### 2. Open the Project
+
+Open the project folder using:
+
+- NetBeans (Recommended)
+- IntelliJ IDEA
+- Eclipse
+
+### 3. Run the Application
+
+Locate the following file:
+
+src/projectgymsystem/Main.java
+
+Run the file and the system menu will appear.
+
+### 4. Use the System
+
+The main menu provides the following options:
+
+1. Add Subscription
+2. Display Subscription
+3. Remove Subscription
+4. New Registration
+5. Show Registration
+6. Cancel Registration
+7. Join as Trainer
+8. Extra Services
+9. Save Trainers
+ 10. Read Trainers
+ 11. GUI
+ 12. Exit
+
+---
+
+## OOP Concepts Demonstrated
+
+This project demonstrates:
+
+- Encapsulation
+- Inheritance
+- Abstraction
+- Polymorphism
+- Interfaces
+- Composition
+- Exception Handling
+- File Processing
+
+---
+
+## Future Improvements
+
+Possible future enhancements include:
+
+- Database integration.
+- Online payment support.
+- Attendance tracking system.
+- Membership renewal reminders.
+- Enhanced graphical interface.
+- Trainer scheduling system.
+
+---
+
+## Conclusion
+
+Gym Management System provides a complete simulation of a gym management environment while demonstrating core Java programming concepts and software engineering practices. The project combines membership management, trainer administration, registration processing, file handling, and fitness-related services within a single application.
